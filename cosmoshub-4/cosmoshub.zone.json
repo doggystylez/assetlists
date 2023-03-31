@@ -1,0 +1,10 @@
+{
+  "$schema": "../zone.schema.json",
+  "chain_name": "cosmoshub",
+  "assets": [
+    {
+      "chain_name": "cosmoshub",
+      "base_denom": "uatom"
+    }
+  ]
+}
