@@ -46,25 +46,32 @@ const bnbScanRoot = 'https://bscscan.com/token/'
 const ftmScanRoot = 'https://ftmscan.com/token/'
 const sinfoniaRoot = 'https://app.sinfonia.zone/fantokens/'
 const assetlistSchema = {
-  description: 'string',
   additional_information: [],
-  pretty_path: 'string',
-  denom_units: [],
-  type_asset: 'string',
   address: 'string',
-  traces: [],
   base: 'string',
-  name: 'string',
+  coingecko_id: 'string',
+  denom_units: [],
+  description: 'string',
   display: 'string',
-  symbol: 'string',
+  keywords: [],
   logo_URIs: {
     png: 'string',
     svg: 'string',
   },
-  coingecko_id: 'string',
-  keywords: []
+  name: 'string',
+  pretty_path: 'string',
+  symbol: 'string',
+  traces: [],
+  type_asset: 'string'
 };
 
+/**
+ * Retrieves the `<chain_name>.zone.json`.
+ *
+ * @function getZoneAssetlist
+ * @returns {Object} The asset list for the specified zone.
+ * @throws {Error} If there is an error reading or parsing the asset list file.
+ */
 function getZoneAssetlist() {
   try {
     return JSON.parse(
@@ -77,6 +84,15 @@ function getZoneAssetlist() {
   }
 }
 
+/**
+ * Finds and returns a registered asset with matching base denomination in the specified chain's asset list.
+ *
+ * @function copyRegisteredAsset
+ * @param {string} chain_name - The name of the chain whose registry is being searched.
+ * @param {string} base_denom - The base denomination of the registered asset being searched for.
+ * @returns {Object|undefined} Returns an object representing a registered asset if found, otherwise undefined.
+ * @throws Will throw an error if there is an issue reading or parsing the JSON file.
+ */
 function copyRegisteredAsset(chain_name, base_denom) {
   try {
     const chainRegistryChainAssetlist = JSON.parse(
@@ -99,6 +115,14 @@ function copyRegisteredAsset(chain_name, base_denom) {
   }
 }
 
+/**
+ * Retrieves IBC connections from a JSON file.
+ *
+ * @function getIbcConnections
+ * @param {string} ibcFileName - The name of the JSON file containing IBC connections.
+ * @returns {Array.<Object>} An array of objects representing IBC connections.
+ * @throws Will throw an error if there is an issue reading or parsing the JSON file.
+ */
 function getIbcConnections(ibcFileName) {
   try {
     return JSON.parse(
@@ -116,6 +140,12 @@ function getIbcConnections(ibcFileName) {
   }
 }
 
+/**
+ * Writes assetlist data to a file.
+ *
+ * @param {Array} assetlist - The array of assets to write to the file.
+ * @throws Will throw an error if there is an issue reading or parsing the JSON file.
+ */
 function writeToFile(assetlist) {
   try {
     fs.writeFile(
@@ -134,6 +164,13 @@ function writeToFile(assetlist) {
   }
 }
 
+/**
+ * Calculates an IBC hash for the given input string.
+ *
+ * @param {string} ibcHashInput - The input string to calculate the hash for.
+ * @returns {Promise<string>} A Promise that resolves with the calculated IBC hash as a string in format `ibc/<hash>`.
+ * @throws {TypeError} If ibcHashInput is not a valid string or if crypto.subtle.digest() fails.
+ */
 async function calculateIbcHash(ibcHashInput) {
   const textAsBuffer = new TextEncoder().encode(ibcHashInput);
   const hashBuffer = await crypto.subtle.digest('SHA-256', textAsBuffer);
@@ -143,12 +180,25 @@ async function calculateIbcHash(ibcHashInput) {
   return ibcHashOutput;
 }
 
+/**
+ * Asynchronously iterates over an array and executes a callback on each element.
+ *
+ * @param {Array} array - The input array to iterate over.
+ * @param {Function} callback - The async function to execute on each element of the array. It takes three arguments: currentValue, index, and the original array.
+ */
 async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array);
   }
 }
 
+/**
+ * Reorders properties of `generatedAsset` based on a `assetlistSchema`.
+ *
+ * @param {{generatedAsset: {}}} object - The input object to reorder, will normally be
+ * @param {{assetlistSchema: {}}} referenceObject - The reference object used for reordering.
+ * @returns {Object} A new reordered object with properties matching those in the reference object.
+ */
 function reorderProperties(object, referenceObject) {
   let newObject = object;
   if (typeof object === 'object') {
@@ -164,8 +214,21 @@ function reorderProperties(object, referenceObject) {
   return newObject;
 }
 
+/**
+ * Generates assets by comparing two asset lists.
+ *
+ * @param {Array} generatedAssetlist - The list of generated assets.
+ * @param {Array} zoneAssetlist - The list of zone assets.
+ * @returns {Promise<Array>} A promise that resolves with the updated list of generated assets.
+ */
 const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
+  /**
+ * @function asyncForEach
+ */
   await asyncForEach(zoneAssetlist.assets, async (zoneAsset) => {
+    /**
+     * @function copyRegisteredAsset
+     */
     let generatedAsset = copyRegisteredAsset(
       zoneAsset.chain_name,
       zoneAsset.base_denom
@@ -174,8 +237,8 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
     if (zoneAsset.chain_name != localChainName) {
       let type = 'ibc';
       let counterparty = {
-        chain_name: zoneAsset.chain_name,
         base_denom: zoneAsset.base_denom,
+        chain_name: zoneAsset.chain_name,
         port: 'transfer',
       };
       let chain = {
@@ -219,9 +282,9 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
 
       //--Create Trace--
       let trace = {
-        type: type,
         counterparty: counterparty,
         chain: chain,
+        type: type
       };
 
       //--Add Trace Path--
@@ -257,25 +320,10 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
         delete trace.chain.port;
         delete trace.counterparty.port;
       }
-      // console.log(trace)
 
       //--Append Latest Trace to Traces--
       traces.push(trace);
       generatedAsset.traces = traces;
-      if (generatedAsset.traces[0].type === 'wrapped') {
-        generatedAsset.traces[0] = generatedAsset.traces[1]
-      }
-      if (generatedAsset.traces[0].type === 'synthetic') {
-        generatedAsset.traces[0] = generatedAsset.traces[1]
-      }
-      if (generatedAsset.traces[0].type === 'forex') {
-        generatedAsset.traces[0] = generatedAsset.traces[1]
-      }
-      if (generatedAsset.traces[0].type === 'bridged') {
-        if (generatedAsset.traces[0].counterparty.chain_name === 'bitcoin') {
-          generatedAsset.traces[0] = generatedAsset.traces[1]
-        }
-      }
 
       //--Get IBC Hash--
       let ibcHash = calculateIbcHash(traces[traces.length - 1].chain.path);
@@ -294,228 +342,260 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
       });
     }
 
-    // Fetch chain.json 'pretty_name'
+    /**
+     * Parses a JSON file containing chain registry information for a given chain name.
+     *
+     * @param {string} chainName - The name of the chain whose registry information is being parsed.
+     * @returns {Object} An object representing the parsed JSON data from the specified file.
+     */
+    function parseChainRegistryJson(chainName) {
+      const chainRegistryChainJson = JSON.parse(
+        fs.readFileSync(
+          path.join(chainRegistryRoot, chainRegistrySubdirectory, chainName, chainFileName)
+        )
+      );
+      return chainRegistryChainJson;
+    }
+
+    /**
+     * Retrieves the pretty name for a chain from `chain.json`.
+     *
+     * @returns {string} The pretty name of the chain.
+     * @throws {Error} If there is an error parsing or retrieving the pretty name.
+     */
     function getPrettyChain() {
       try {
-        const chainRegistryChainJson = JSON.parse(
-          fs.readFileSync(
-            path.join(
-              chainRegistryRoot,
-              chainRegistrySubdirectory,
-              zoneAsset.chain_name,
-              chainFileName
-            )
-          )
-        );
-        return chainRegistryChainJson.pretty_name;
+        const { pretty_name } = parseChainRegistryJson(zoneAsset.chain_name);
+        return pretty_name;
       } catch (err) {
         console.log(err);
-        return "Error"
+        return "Error";
       }
     }
 
-    // Fetch chain.json 'website' for 'additional_information'
+    /**
+     * Retrieves the chain's website URL from `chain.json`.
+     *
+     * @returns {{chain_website: string}} An object with a single property "chain_website" containing the retrieved website URL or an error message.
+     * @throws {Error} If there is an error in generating the result.
+     */
     function getChainWebsite() {
       try {
-        const chainRegistryChainJson = JSON.parse(
-          fs.readFileSync(
-            path.join(
-              chainRegistryRoot,
-              chainRegistrySubdirectory,
-              zoneAsset.chain_name,
-              chainFileName
-            )
-          )
-        );
-        let tempObj = {
-          "chain_website": chainRegistryChainJson.website
-        }
-        return tempObj;
+        const { website } = parseChainRegistryJson(zoneAsset.chain_name)
+        return { "chain_website": website ?? "Error in Chain Registry." };
       } catch (err) {
-        let tempObj = {
-          "chain_website": "Error in Chain Registry."
-        }
         console.log(err);
-        return tempObj
+        return { "chain_website": "Error in Generation." }
       }
     }
 
-    // Fetch chain_name from chain.json to build 'coin_landing_page
+    /**
+     * Returns the coin landing page URL for a given chain.
+     *
+     * @returns {{coin_landing_page: string}} An object with a single property "coin_landing_page" containing the URL of the coin landing page.
+     * @throws {Error} If there is an error in generating or retrieving data from Chain Registry.
+     */
     function getCoinLandingWebsite() {
+      // TODO: Must be adjusted when update from Coin Landing Page about programmatically receiving info.
       try {
-        const chainRegistryChainJson = JSON.parse(
-          fs.readFileSync(
-            path.join(
-              chainRegistryRoot,
-              chainRegistrySubdirectory,
-              zoneAsset.chain_name,
-              chainFileName
-            )
-          )
-        );
-        let tempObj = {
-          "coin_landing_page": coinLandingRoot + chainRegistryChainJson.chain_name
-        }
-        return tempObj;
+        const { chain_name } = parseChainRegistryJson(zoneAsset.chain_name);
+        return { "coin_landing_page": coinLandingRoot + chain_name ?? "Error in Chain Registry." };
       } catch (err) {
-        let tempObj = {
-          "coin_landing_page": "Error in Chain Registry."
-        }
-        console.log(err);
-        return tempObj
+        console.log(err)
+        return { "coin_landing_page": "Error in Generation." }
       }
     }
 
-    // Use chain.json to pull GH page for chain
+    const { frontend_properties: override } = zoneAsset;
+    const allAdditional = override.additional_information ? [...override.additional_information.filter(item => !item.git_repo)] : [];
+    const allKeywords = generatedAsset.keywords ? [...generatedAsset.keywords] : [];
+
+    /**
+     * Returns the Git repo for a given asset. Based on if
+     *
+     * @returns {{git_repo: string}} An object containing the Git repository URL.
+     * @throws {Error} If no Git repo is found.
+     */
     function getGitWebsite() {
       try {
-        const chainRegistryChainJson = JSON.parse(
-          fs.readFileSync(
-            path.join(
-              chainRegistryRoot,
-              chainRegistrySubdirectory,
-              zoneAsset.chain_name,
-              chainFileName
-            )
-          )
-        );
-        let tempObj = {
-          "git_repo": chainRegistryChainJson.codebase.git_repo
+        let gitRepo;
+        if (override.additional_information) {
+          override.additional_information.forEach((asset) => {
+            // Check if the asset has git repo property in the `chain.json` and no value has been set yet.
+            if (!gitRepo && asset.git_repo) {
+              // Use the asset's git repo property value
+              gitRepo = asset.git_repo;
+            }
+          });
         }
+        const { codebase } = parseChainRegistryJson(zoneAsset.chain_name);
+        if (!gitRepo && codebase?.git_repo) {
+          gitRepo = codebase.git_repo;
+        }
+        if (!gitRepo) throw new Error("No Git repo found");
+        return { "git_repo": gitRepo };
+      } catch (error) {
+        console.error(error);
+        const chainRegistryChainJson = parseChainRegistryJson(zoneAsset.chain_name);
+        const tempObj = { "git_repo": chainRegistryChainJson.codebase?.git_repo || "Error in Chain Registry." };
         return tempObj;
-      } catch (err) {
-        let tempObj = {
-          "git_repo": "Error in Chain Registry."
-        }
-        console.log(err);
-        return tempObj
       }
     }
-
-    let allAdditional = []
-
-    // Check keywords for additional_info modification
 
     // Bridged Asset Modifier
     if (generatedAsset.traces) {
-      if (generatedAsset.traces[0].type === 'ibc') {
-        allAdditional = []
+      /**
+       * Returns an assets `generatedAsset.traces` given certain cases.
+       *
+       * @returns {Object} `generatedAsset.traces[0]` or `generatedAsset.traces[1]`
+       */
+      let firstTrace;
+      firstTrace = generatedAsset.traces[0];
+
+      // If the type is `ibc` skip all bs below
+      if (firstTrace.type === "ibc") {
       } else {
-        let protocol;
-        let contractAddress;
+        /**
+         * Returns an object with a `block_explorer_link` given certain cases.
+         *
+         * @returns {{block_explorer_link: string}} `block_explorer_link: string`
+         */
         let linkContract;
-
-        protocol = generatedAsset.traces[0].counterparty.chain_name
-        contractAddress = generatedAsset.traces[0].counterparty.base_denom
-
-        if (protocol === 'bitcoin') {
-          protocol = generatedAsset.traces[1].counterparty.chain_name
-          contractAddress = generatedAsset.traces[1].counterparty.base_denom
+        switch (firstTrace.counterparty.chain_name) {
+          /**
+           * If the `chain_name` is: wrapped, synthetic, forex, bitcoin (grv assets), or is liquid-stake and counterparty is persistence
+           * Then, firstTrace is based on `generatedAsset.traces[1]` not `generatedAsset.traces[0]`
+           * Otherwise, firstTrace is reassigned to `generatedAsset.traces[0]`
+           */
+          case "wrapped":
+          case "synthetic":
+          case "forex":
+          case "bitcoin":
+          case "liquid-stake" && firstTrace.counterparty.chain_name === "persistence":
+            firstTrace = generatedAsset.traces[1];
+            linkContract = { block_explorer_link: etherScanRoot + firstTrace.counterparty.base_denom };
+            break;
+        default:
+          firstTrace = generatedAsset.traces[0];
+          break;
+      }
+      /**
+       * Switch between cases where `chain_name` is: ethereum, polygon, moonbeam, avalanche, fantom, bianancesmartchain for axl assets.
+       * Otherwise, yeet along.
+       */
+        switch (firstTrace.counterparty.chain_name) {
+          case "ethereum":
+            linkContract = { block_explorer_link: etherScanRoot + firstTrace.counterparty.base_denom };
+            break;
+          case "polygon":
+            linkContract = { block_explorer_link: polygonScanRoot + firstTrace.counterparty.base_denom };
+            break;
+          case "moonbeam":
+            linkContract = { block_explorer_link: moonScanRoot + firstTrace.counterparty.base_denom };
+            break;
+          case "avalanche":
+            linkContract = { block_explorer_link: snowTraceRoot + firstTrace.counterparty.base_denom };
+            break;
+          case "fantom":
+            linkContract = { block_explorer_link: ftmScanRoot + firstTrace.counterparty.base_denom };
+            break;
+          case "binancesmartchain":
+            linkContract = { block_explorer_link: bnbScanRoot + firstTrace.counterparty.base_denom };
+          default:
+            break;
         }
-        if (protocol === 'ethereum') {
-          linkContract = { "block_explorer_link": etherScanRoot + contractAddress }
-          allAdditional.push(linkContract)
-        }
-        if (protocol === 'polygon') {
-          linkContract = { "block_explorer_link": polygonScanRoot + contractAddress }
-          allAdditional.push(linkContract)
-        }
-        if (protocol === 'moonbeam') {
-          linkContract = { "block_explorer_link": moonScanRoot + contractAddress }
-          allAdditional.push(linkContract)
-        }
-        if (protocol === 'avalanche') {
-          linkContract = { "block_explorer_link": snowTraceRoot + contractAddress }
-          allAdditional.push(linkContract)
-        }
-        if (protocol === 'fantom') {
-          linkContract = { "block_explorer_link": ftmScanRoot + contractAddress }
-          allAdditional.push(linkContract)
-        }
-        if (protocol === 'binancesmartchain') {
-          linkContract = { "block_explorer_link": bnbScanRoot + contractAddress }
-          allAdditional.push(linkContract)
-        }
+        // Push any changes into `allAdditional`.
+        allAdditional.push(linkContract);
       }
     }
 
-    // Overriding Properties
-    const override = zoneAsset.frontend_properties;
-    let allKeywords = []
-    if (getPrettyChain()) {
-      generatedAsset.name = getPrettyChain();
-    } else {
-      generatedAsset.name = override.chain_name_pretty;
-    }
-
-    // OVERRIDES AND APPENDS
+    /**
+     * Catch any overrides from `frontend_properties` if they exist in zoneAsset.
+     */
     if (override) {
-      // Override symbol with zoneAsset override.
+      /**
+       * If getPrettyChain's result is valid, override `name` with the result.
+       * Otherwise, override with `chain_name_pretty`.
+       */
+      if (getPrettyChain()) {
+        generatedAsset.name = getPrettyChain();
+      } else {
+        generatedAsset.name = override.chain_name_pretty;
+      }
+      /**
+       * If there is a symbol override, use it.
+       */
       if (override.symbol) {
         generatedAsset.symbol = override.symbol;
       }
-
-      // Override description
+      /**
+       * If there is a description override, use it.
+       */
       if (override.description) {
-        generatedAsset.description = override.description
+        generatedAsset.description = override.description;
       }
-
-      // Add zoneAsset pretty_path
+      /**
+       * If there is a pretty_path override, use it.
+       */
       if (override.pretty_path) {
         generatedAsset.pretty_path = override.pretty_path;
       }
-
-      // Override logo_URIs with zoneAsset logo_URIs.
+      /**
+       * If there is any logo_URIs overrides, use it.
+       */
       if (override.logo_URIs) {
         generatedAsset.logo_URIs = override.logo_URIs;
       }
-
-      // Override coingecko_id with zoneAsset coingecko_id
+      /**
+       * If there is a coingecko_id override, use it.
+       */
       if (override.coingecko_id) {
         generatedAsset.coingecko_id = override.coingecko_id;
       }
-
-      // Add, combine, and flatten keywords if any.
-      if (generatedAsset.keywords) {
-        allKeywords.push(override.keywords)
-        allKeywords.push(generatedAsset.keywords);
-        generatedAsset.keywords = allKeywords.flat()
-      } else {
-        allKeywords.push(override.keywords);
-        generatedAsset.keywords = allKeywords.flat();
+      /**
+       * If there are keyword overrides, push them into the allKeywords array.
+       */
+      if (Array.isArray(override.keywords)) {
+        allKeywords.push(...override.keywords);
+      }
+      /**
+       * Push the results of the functions of: getChainWebsite, getCoinLandingWebsite, getGitWebsite
+       */
+      allAdditional.push(getChainWebsite());
+      allAdditional.push(getCoinLandingWebsite());
+      allAdditional.push(getGitWebsite());
+      /**
+       * If allKeywords has more than 0 items, push them into the keywords array for the asset.
+       */
+      if (allKeywords.length > 0) {
+        generatedAsset.keywords = allKeywords;
+      }
+      /**
+       * If there is a `Sinfonia` keyword in the `allKeywords`, create a `sinfonia_link` object.
+       *
+       * @returns {{ sinfonia_link: string }} An object containing a `sinfonia_link` object.
+       */
+      function getSinfoniaLink() {
+        if (allKeywords.includes('Sinfonia')) {
+          let linkSinfonia;
+          let baseFanDenom = generatedAsset.traces[0].counterparty.base_denom;
+          linkSinfonia = { "sinfonia_link": sinfoniaRoot + baseFanDenom };
+          return linkSinfonia;
+        }
       }
 
-      if (override.additional_information) {
-        allAdditional.push(override.additional_information)
-        allAdditional.push(getChainWebsite())
-        allAdditional.push(getCoinLandingWebsite())
-        generatedAsset.additional_information = allAdditional.flat()
-      } else {
-        allAdditional.push(getChainWebsite())
-        allAdditional.push(getCoinLandingWebsite())
-        generatedAsset.additional_information = allAdditional.flat()
+      const sinfonaLinkResult = getSinfoniaLink();
+      /**
+       * If `getSinfoniaLink` is not `null` and `undefined` push the object into allAdditional
+       */
+      if (sinfonaLinkResult !== null && sinfonaLinkResult !== undefined) {
+        allAdditional.push(sinfonaLinkResult);
       }
-    }
-
-    // Github Modifier
-    for (let item in generatedAsset.additional_information) {
-      if (!generatedAsset.additional_information[item].git_repo === "") {
-        generatedAsset.additional_information = allAdditional
-        allAdditional.push(getGitWebsite())
-        generatedAsset.additional_information = allAdditional.flat()
-      }
-    }
-
-
-    // Sinfonia Modifier
-    for (let tag in generatedAsset.keywords) {
-      if (generatedAsset.keywords[tag] === 'Sinfonia') {
-        generatedAsset.additional_information = allAdditional
-        let linkSinfonia;
-        let baseFanDenom = generatedAsset.traces[0].counterparty.base_denom
-        linkSinfonia = { "sinfonia_link": sinfoniaRoot + baseFanDenom }
-        allAdditional.push(linkSinfonia)
-        generatedAsset.additional_information = allAdditional.flat()
+      /**
+       * If `getSinfoniaLink` is not `null` and `undefined` push the object into allAdditional
+       */
+      if (allAdditional.length > 0) {
+        generatedAsset.additional_information = allAdditional;
       }
     }
 
@@ -524,7 +604,7 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
     // To see each asset generated, uncomment next line. **Should only be used for debug purposes. Re-comment before commit
     // console.log(generatedAsset);
 
-    //- Append Asset to Assetlist
+    // Append the built asset to Assetlist
     generatedAssetlist.push(generatedAsset);
 
     // To see full asset list, uncomment next line. **Should only be used for debug purposes. Re-comment before commit
@@ -532,18 +612,44 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
   });
 };
 
+/**
+ * Generates an asset list for a local chain using zone asset lists.
+ *
+ * @async
+ * @function generateAssetlist
+ * @returns {Promise<void>}
+ */
 async function generateAssetlist() {
+  /**
+   * Gets the zone asset list.
+   *
+   * @function getZoneAssetlist
+   */
   let zoneAssetlist = getZoneAssetlist();
-
   let generatedAssetlist = [];
+
+  /**
+   * Generates assets based on the given parameters and adds them to the provided array.
+   *
+   * @async
+   * @function generateAssets
+   *
+   * @param {Array} generatedAssetlist - The array where generated assets will be added.
+   * @param {Object} zoneAssetlist - The object containing information about available zones.
+   */
   await generateAssets(generatedAssetlist, zoneAssetlist);
   let chainAssetlist = {
     $schema: "../assetlist.schema.json",
-    chain_name: localChainName,
     assets: generatedAssetlist,
+    chain_name: localChainName
   };
-  //console.log(chainAssetlist);
-
+  // console.log(chainAssetlist);
+  /**
+   * Writes data to file system synchronously.
+   *
+   * @function writeToFile
+   * @param {Object} chainAssetlist - Data that needs to be written into file.
+   */
   writeToFile(chainAssetlist);
 }
 

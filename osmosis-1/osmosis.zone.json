@@ -449,8 +449,8 @@
           "Native"
         ],
         "logo_URIs": {
-          "png": "https://raw.githubusercontent.com/osmo-support-lab/assetlists/main/images/axelar/axlDOT.png",
-          "svg": "https://raw.githubusercontent.com/osmo-support-lab/assetlists/main/images/axelar/axlDOT.svg"
+          "png": "https://raw.githubusercontent.com/osmo-support-lab/assetlists/main/images/axelar/axlxcDOT.png",
+          "svg": "https://raw.githubusercontent.com/osmo-support-lab/assetlists/main/images/axelar/axlxcDOT.svg"
         },
         "pretty_path": "xcDOT on Moonbeam via Axelar",
         "symbol": "xcDOT.axl"
@@ -711,8 +711,7 @@
       "frontend_properties": {
         "keywords": [
           "Native",
-          "Liquid-Staked",
-          "Utility"
+          "Liquid-Staked"
         ]
       }
     },
@@ -1618,6 +1617,31 @@
       }
     },
     {
+      "base_denom": "ufrienzies",
+      "chain_name": "noble",
+      "frontend_properties": {
+        "keywords": [
+          "Native",
+          "Collateral-Based"
+        ]
+      }
+    },
+    {
+      "base_denom": "uusdc",
+      "chain_name": "noble",
+      "frontend_properties": {
+        "description": "Cosmos native USD Coin issued by Circle via Noble.",
+        "keywords": [
+          "Native",
+          "Fiat-Collateralized"
+        ],
+        "logo_URIs": {
+          "png": "https://raw.githubusercontent.com/osmo-support-lab/assetlists/main/images/noble/USDC.png",
+          "svg": "https://raw.githubusercontent.com/osmo-support-lab/assetlists/main/images/noble/USDC.svg"
+        }
+      }
+    },
+    {
       "base_denom": "mGeo",
       "chain_name": "odin",
       "frontend_properties": {
@@ -2046,7 +2070,17 @@
       "chain_name": "terra2",
       "frontend_properties": {
         "keywords": [
-          "Unknown"
+          "Utility"
+        ]
+      }
+    },
+    {
+      "base_denom": "cw20:terra1ecgazyd0waaj3g7l9cmy5gulhxkps2gmxu9ghducvuypjq68mq2s5lvsct",
+      "chain_name": "terra2",
+      "frontend_properties": {
+        "keywords": [
+          "Utility",
+          "Liquid-Staked"
         ]
       }
     },
