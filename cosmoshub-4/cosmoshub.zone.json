@@ -251,16 +251,6 @@
       }
     },
     {
-      "base_denom": "ustars",
-      "chain_name": "stargaze",
-      "frontend_properties": {
-        "keywords": [
-          "Native",
-          "Utility"
-        ]
-      }
-    },
-    {
       "base_denom": "ustrd",
       "chain_name": "stride",
       "frontend_properties": {
