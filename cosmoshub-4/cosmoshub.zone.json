@@ -337,6 +337,69 @@
           "Native"
         ]
       }
+    },
+    {
+      "base_denom": "uscrt",
+      "chain_name": "secretnetwork",
+      "frontend_properties": {
+        "keywords": [
+          "Native"
+        ]
+      }
+    },
+    {
+      "base_denom": "uiov",
+      "chain_name": "starname",
+      "frontend_properties": {
+        "keywords": [
+          "Native"
+        ]
+      }
+    },
+    {
+      "base_denom": "uxki",
+      "chain_name": "kichain",
+      "frontend_properties": {
+        "keywords": [
+          "Native"
+        ]
+      }
+    },
+    {
+      "base_denom": "ukava",
+      "chain_name": "kava",
+      "frontend_properties": {
+        "keywords": [
+          "Native"
+        ]
+      }
+    },
+    {
+      "base_denom": "ubtsg",
+      "chain_name": "bitsong",
+      "frontend_properties": {
+        "keywords": [
+          "Native"
+        ]
+      }
+    },
+    {
+      "base_denom": "ubcna",
+      "chain_name": "bitcanna",
+      "frontend_properties": {
+        "keywords": [
+          "Native"
+        ]
+      }
+    },
+    {
+      "base_denom": "aevmos",
+      "chain_name": "evmos",
+      "frontend_properties": {
+        "keywords": [
+          "Native"
+        ]
+      }
     }
   ]
 }
