@@ -44,6 +44,7 @@ const snowTraceRoot = 'https://snowtrace.io/token/'
 const moonScanRoot = 'https://moonscan.io/token/'
 const bnbScanRoot = 'https://bscscan.com/token/'
 const ftmScanRoot = 'https://ftmscan.com/token/'
+const mintScanJuno = 'https://www.mintscan.io/juno/wasm/contract/'
 const sinfoniaRoot = 'https://app.sinfonia.zone/fantokens/'
 const assetlistSchema = {
   additional_information: [],
@@ -407,9 +408,7 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
     }
 
     const { frontend_properties: override } = zoneAsset;
-    console.log(zoneAsset)
-    let allAdditional = []
-    //const allAdditional = override.additional_information ? [...override.additional_information.filter(item => !item.git_repo)] : [];
+    const allAdditional = override.additional_information ? [...override.additional_information] : [];
     const allKeywords = generatedAsset.keywords ? [...generatedAsset.keywords] : [];
 
     /**
@@ -420,27 +419,11 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
      */
     function getGitWebsite() {
       try {
-        let gitRepo;
-        if (override.additional_information) {
-          override.additional_information.forEach((asset) => {
-            // Check if the asset has git repo property in the `chain.json` and no value has been set yet.
-            if (!gitRepo && asset.git_repo) {
-              // Use the asset's git repo property value
-              gitRepo = asset.git_repo;
-            }
-          });
-        }
-        const { codebase } = parseChainRegistryJson(zoneAsset.chain_name);
-        if (!gitRepo && codebase?.git_repo) {
-          gitRepo = codebase.git_repo;
-        }
-        if (!gitRepo) throw new Error("No Git repo found");
-        return { "git_repo": gitRepo };
+        const chainRegistryChainJson = parseChainRegistryJson(zoneAsset.chain_name);
+        const gitRepo = { "git_repo": chainRegistryChainJson.codebase?.git_repo || `Error in Chain Registry for ${zoneAsset.chain_name}.` };
+        return gitRepo;
       } catch (error) {
         console.error(error);
-        const chainRegistryChainJson = parseChainRegistryJson(zoneAsset.chain_name);
-        const tempObj = { "git_repo": chainRegistryChainJson.codebase?.git_repo || "Error in Chain Registry." };
-        return tempObj;
       }
     }
 
@@ -477,14 +460,14 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
             firstTrace = generatedAsset.traces[1];
             linkContract = { block_explorer_link: etherScanRoot + firstTrace.counterparty.base_denom };
             break;
-        default:
-          firstTrace = generatedAsset.traces[0];
-          break;
-      }
-      /**
-       * Switch between cases where `chain_name` is: ethereum, polygon, moonbeam, avalanche, fantom, bianancesmartchain for axl assets.
-       * Otherwise, yeet along.
-       */
+          default:
+            firstTrace = generatedAsset.traces[0];
+            break;
+        }
+        /**
+         * Switch between cases where `chain_name` is: ethereum, polygon, moonbeam, avalanche, fantom, bianancesmartchain for axl assets.
+         * Otherwise, yeet along.
+         */
         switch (firstTrace.counterparty.chain_name) {
           case "ethereum":
             linkContract = { block_explorer_link: etherScanRoot + firstTrace.counterparty.base_denom };
@@ -504,10 +487,13 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
           case "binancesmartchain":
             linkContract = { block_explorer_link: bnbScanRoot + firstTrace.counterparty.base_denom };
           default:
-            break;
+            linkContract = null
         }
-        // Push any changes into `allAdditional`.
-        allAdditional.push(linkContract);
+        if (linkContract === null) {
+
+        } else {
+          allAdditional.push(linkContract);
+        }
       }
     }
 
@@ -563,9 +549,22 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
       /**
        * Push the results of the functions of: getChainWebsite, getCoinLandingWebsite, getGitWebsite
        */
-      allAdditional.push(getChainWebsite());
-      allAdditional.push(getCoinLandingWebsite());
-      allAdditional.push(getGitWebsite());
+      if (generatedAsset.name !== "Juno") {
+        allAdditional.push(getChainWebsite());
+        allAdditional.push(getCoinLandingWebsite());
+        allAdditional.push(getGitWebsite());
+      } else if (generatedAsset.symbol === "JUNO") {
+        allAdditional.push(getChainWebsite());
+        allAdditional.push(getCoinLandingWebsite());
+        allAdditional.push(getGitWebsite());
+      }
+
+      if (generatedAsset.address?.slice(0, 4) === 'juno') {
+        let linkContract;
+        linkContract = { block_explorer_link: mintScanJuno + generatedAsset.address};
+        allAdditional.push(linkContract)
+      }
+
       /**
        * If allKeywords has more than 0 items, push them into the keywords array for the asset.
        */
@@ -577,22 +576,13 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
        *
        * @returns {{ sinfonia_link: string }} An object containing a `sinfonia_link` object.
        */
-      function getSinfoniaLink() {
+
         if (allKeywords.includes('Sinfonia')) {
           let linkSinfonia;
           let baseFanDenom = generatedAsset.traces[0].counterparty.base_denom;
           linkSinfonia = { "sinfonia_link": sinfoniaRoot + baseFanDenom };
-          return linkSinfonia;
+          allAdditional.push(linkSinfonia);;
         }
-      }
-
-      const sinfonaLinkResult = getSinfoniaLink();
-      /**
-       * If `getSinfoniaLink` is not `null` and `undefined` push the object into allAdditional
-       */
-      if (sinfonaLinkResult !== null && sinfonaLinkResult !== undefined) {
-        allAdditional.push(sinfonaLinkResult);
-      }
       /**
        * If `getSinfoniaLink` is not `null` and `undefined` push the object into allAdditional
        */
@@ -641,7 +631,7 @@ async function generateAssetlist() {
    */
   await generateAssets(generatedAssetlist, zoneAssetlist);
   let chainAssetlist = {
-    $schema: "../assetlist.schema.json",
+    $schema: "https://raw.githubusercontent.com/osmo-support-lab/assetlists/main/assetlist.schema.json",
     assets: generatedAssetlist,
     chain_name: localChainName
   };
