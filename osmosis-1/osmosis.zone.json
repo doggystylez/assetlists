@@ -21,7 +21,7 @@
         "osmosis_main": true,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "USDC"
+          "symbol": "USDC.axl"
         }
       },
       {
@@ -31,7 +31,7 @@
         "osmosis_main": true,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "ETH",
+          "symbol": "ETH.axl",
           "logo_URIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/ethereum/images/eth-white.png"
           }
@@ -44,7 +44,7 @@
         "osmosis_main": true,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "WBTC"
+          "symbol": "WBTC.axl"
         }
       },
       {
@@ -54,7 +54,7 @@
         "osmosis_main": true,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "USDT"
+          "symbol": "USDT.axl"
         }
       },
       {
@@ -64,7 +64,7 @@
         "osmosis_main": true,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "DAI"
+          "symbol": "DAI.axl"
         }
       },
       {
@@ -74,7 +74,7 @@
         "osmosis_main": false,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "BUSD"
+          "symbol": "BUSD.axl"
         }
       },
       {
@@ -98,7 +98,7 @@
         "osmosis_main": true,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "BNB"
+          "symbol": "BNB.axl"
         }
       },
       {
@@ -108,7 +108,7 @@
         "osmosis_main": true,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "MATIC",
+          "symbol": "MATIC.axl",
           "logo_URIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/polygon/images/matic-purple.png"
           }
@@ -121,7 +121,7 @@
         "osmosis_main": true,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "AVAX",
+          "symbol": "AVAX.axl",
           "logo_URIs": {
             "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/_non-cosmos/avalanche/images/avax.png"
           }
@@ -148,7 +148,7 @@
         "osmosis_main": true,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "DOT"
+          "symbol": "DOT.axl"
         }
       },
       {
@@ -483,7 +483,7 @@
         "base_denom": "frax-wei",
         "path": "transfer/channel-208/frax-wei",
         "override_properties": {
-          "symbol": "FRAX"
+          "symbol": "FRAX.axl"
         }
       },
       {
@@ -630,7 +630,7 @@
         "osmosis_main": true,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "LINK"
+          "symbol": "LINK.axl"
         }
       },
       {
@@ -645,7 +645,7 @@
         "base_denom": "aave-wei",
         "path": "transfer/channel-208/aave-wei",
         "override_properties": {
-          "symbol": "AAVE"
+          "symbol": "AAVE.axl"
         }
       },
       {
@@ -661,7 +661,7 @@
         "base_denom": "axs-wei",
         "path": "transfer/channel-208/axs-wei",
         "override_properties": {
-          "symbol": "AXS"
+          "symbol": "AXS.axl"
         }
       },
       {
@@ -671,7 +671,7 @@
         "osmosis_main": true,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "MKR"
+          "symbol": "MKR.axl"
         }
       },
       {
@@ -679,7 +679,7 @@
         "base_denom": "rai-wei",
         "path": "transfer/channel-208/rai-wei",
         "override_properties": {
-          "symbol": "RAI"
+          "symbol": "RAI.axl"
         }
       },
       {
@@ -689,7 +689,7 @@
         "osmosis_main": false,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "SHIB"
+          "symbol": "SHIB.axl"
         }
       },
       {
@@ -697,7 +697,7 @@
         "base_denom": "uni-wei",
         "path": "transfer/channel-208/uni-wei",
         "override_properties": {
-          "symbol": "UNI"
+          "symbol": "UNI.axl"
         }
       },
       {
@@ -705,7 +705,7 @@
         "base_denom": "xcn-wei",
         "path": "transfer/channel-208/xcn-wei",
         "override_properties": {
-          "symbol": "XCN"
+          "symbol": "XCN.axl"
         }
       },
       {
@@ -762,7 +762,7 @@
         "base_denom": "wglmr-wei",
         "path": "transfer/channel-208/wglmr-wei",
         "override_properties": {
-          "symbol": "GLMR"
+          "symbol": "GLMR.axl"
         }
       },
       {
@@ -1075,7 +1075,7 @@
         "osmosis_main": false,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "FTM"
+          "symbol": "FTM.axl"
         }
       },
       {
@@ -1106,7 +1106,7 @@
         "osmosis_main": false,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "polygon.USDC",
+          "symbol": "polygon.USDC.axl",
           "logo_URIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/polygon.usdc.svg"
           }
@@ -1119,7 +1119,7 @@
         "osmosis_main": false,
         "osmosis_frontier": true,
         "override_properties": {
-          "symbol": "avalanche.USDC",
+          "symbol": "avalanche.USDC.axl",
           "logo_URIs": {
             "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/avalanche.usdc.svg"
           }
