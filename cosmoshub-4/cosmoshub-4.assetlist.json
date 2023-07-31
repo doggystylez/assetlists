@@ -1,5 +1,5 @@
 {
-  "$schema": "../assetlist.schema.json",
+  "$schema": "https://raw.githubusercontent.com/osmo-support-lab/assetlists/main/assetlist.schema.json",
   "assets": [
     {
       "base": "uatom",
@@ -862,7 +862,8 @@
         "Collateral-Based"
       ],
       "logo_URIs": {
-        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/frnz.png"
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/frnz.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/noble/images/frnz.svg"
       },
       "name": "Noble",
       "symbol": "FRNZ",
@@ -1098,7 +1099,6 @@
     },
     {
       "additional_information": [
-        null,
         {
           "chain_website": "https://persistence.one/"
         },
@@ -1145,7 +1145,7 @@
           "type": "liquid-stake",
           "counterparty": {
             "chain_name": "persistence",
-            "base_denom": "XPRT"
+            "base_denom": "uxprt"
           },
           "provider": "Persistence"
         },
@@ -1456,7 +1456,6 @@
     },
     {
       "additional_information": [
-        null,
         {
           "chain_website": "https://stride.zone/"
         },
@@ -1518,7 +1517,6 @@
     },
     {
       "additional_information": [
-        null,
         {
           "chain_website": "https://stride.zone/"
         },
@@ -1579,7 +1577,6 @@
     },
     {
       "additional_information": [
-        null,
         {
           "chain_website": "https://stride.zone/"
         },
@@ -1640,7 +1637,6 @@
     },
     {
       "additional_information": [
-        null,
         {
           "chain_website": "https://stride.zone/"
         },
@@ -1701,7 +1697,6 @@
     },
     {
       "additional_information": [
-        null,
         {
           "chain_website": "https://stride.zone/"
         },
@@ -1762,7 +1757,6 @@
     },
     {
       "additional_information": [
-        null,
         {
           "chain_website": "https://stride.zone/"
         },
@@ -1823,7 +1817,6 @@
     },
     {
       "additional_information": [
-        null,
         {
           "chain_website": "https://stride.zone/"
         },
@@ -1930,6 +1923,431 @@
           "chain": {
             "channel_id": "channel-288",
             "path": "transfer/channel-288/uumee"
+          },
+          "type": "ibc"
+        }
+      ]
+    },
+    {
+      "additional_information": [
+        {
+          "chain_website": "https://scrt.network/"
+        },
+        {
+          "coin_landing_page": "https://www.coinlanding.page/post/secretnetwork"
+        },
+        {
+          "git_repo": "https://github.com/scrtlabs/SecretNetwork"
+        }
+      ],
+      "base": "ibc/1542F8DC70E7999691E991E1EDEB1B47E65E3A217B1649D347098EE48ACB580F",
+      "coingecko_id": "secret",
+      "denom_units": [
+        {
+          "denom": "ibc/1542F8DC70E7999691E991E1EDEB1B47E65E3A217B1649D347098EE48ACB580F",
+          "exponent": 0,
+          "aliases": [
+            "uscrt"
+          ]
+        },
+        {
+          "denom": "scrt",
+          "exponent": 6
+        }
+      ],
+      "description": "The native token of Secret Network",
+      "display": "scrt",
+      "keywords": [
+        "Native"
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/scrt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/scrt.svg"
+      },
+      "name": "Secret Network",
+      "symbol": "SCRT",
+      "traces": [
+        {
+          "counterparty": {
+            "base_denom": "uscrt",
+            "chain_name": "secretnetwork",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-235",
+            "path": "transfer/channel-235/uscrt"
+          },
+          "type": "ibc"
+        }
+      ]
+    },
+    {
+      "additional_information": [
+        {
+          "chain_website": "https://www.starname.me/"
+        },
+        {
+          "coin_landing_page": "https://www.coinlanding.page/post/starname"
+        },
+        {
+          "git_repo": "https://github.com/iov-one/starnamed"
+        }
+      ],
+      "base": "ibc/68A333688E5B07451F95555F8FE510E43EF9D3D44DF0909964F92081EF9BE5A7",
+      "coingecko_id": "starname",
+      "denom_units": [
+        {
+          "denom": "ibc/68A333688E5B07451F95555F8FE510E43EF9D3D44DF0909964F92081EF9BE5A7",
+          "exponent": 0,
+          "aliases": [
+            "uiov"
+          ]
+        },
+        {
+          "denom": "iov",
+          "exponent": 6
+        }
+      ],
+      "description": "IOV coin is the token for the Starname (IOV) Asset Name Service",
+      "display": "iov",
+      "keywords": [
+        "Native"
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/starname/images/iov.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/starname/images/iov.svg"
+      },
+      "name": "Starname",
+      "symbol": "IOV",
+      "traces": [
+        {
+          "counterparty": {
+            "base_denom": "uiov",
+            "chain_name": "starname",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-158",
+            "path": "transfer/channel-158/uiov"
+          },
+          "type": "ibc"
+        }
+      ]
+    },
+    {
+      "additional_information": [
+        {
+          "chain_website": "https://foundation.ki/"
+        },
+        {
+          "coin_landing_page": "https://www.coinlanding.page/post/kichain"
+        },
+        {
+          "git_repo": "https://github.com/KiFoundation/ki-tools"
+        }
+      ],
+      "base": "ibc/533E5FFC606FD11B8DCA309C66AFD6A1F046EF784A73F323A332CF6823F0EA87",
+      "coingecko_id": "ki",
+      "denom_units": [
+        {
+          "denom": "ibc/533E5FFC606FD11B8DCA309C66AFD6A1F046EF784A73F323A332CF6823F0EA87",
+          "exponent": 0,
+          "aliases": [
+            "uxki"
+          ]
+        },
+        {
+          "denom": "xki",
+          "exponent": 6
+        }
+      ],
+      "description": "The native token of Ki Chain",
+      "display": "xki",
+      "keywords": [
+        "Native"
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kichain/images/xki.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kichain/images/xki.svg"
+      },
+      "name": "Ki",
+      "symbol": "XKI",
+      "traces": [
+        {
+          "counterparty": {
+            "base_denom": "uxki",
+            "chain_name": "kichain",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-223",
+            "path": "transfer/channel-223/uxki"
+          },
+          "type": "ibc"
+        }
+      ]
+    },
+    {
+      "additional_information": [
+        {
+          "chain_website": "https://www.kava.io/"
+        },
+        {
+          "coin_landing_page": "https://www.coinlanding.page/post/kava"
+        },
+        {
+          "git_repo": "https://github.com/kava-Labs/kava/"
+        }
+      ],
+      "base": "ibc/8870C4203CEBF2279BA065E3DE95FC3F8E05A4A93424E7DC707A21514BE353A0",
+      "coingecko_id": "kava",
+      "denom_units": [
+        {
+          "denom": "ibc/8870C4203CEBF2279BA065E3DE95FC3F8E05A4A93424E7DC707A21514BE353A0",
+          "exponent": 0,
+          "aliases": [
+            "ukava"
+          ]
+        },
+        {
+          "denom": "kava",
+          "exponent": 6
+        }
+      ],
+      "description": "The native staking and governance token of Kava",
+      "display": "kava",
+      "keywords": [
+        "Native"
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/kava.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/kava/images/kava.svg"
+      },
+      "name": "Kava",
+      "symbol": "KAVA",
+      "traces": [
+        {
+          "counterparty": {
+            "base_denom": "ukava",
+            "chain_name": "kava",
+            "channel_id": "channel-0"
+          },
+          "chain": {
+            "channel_id": "channel-277",
+            "path": "transfer/channel-277/ukava"
+          },
+          "type": "ibc"
+        }
+      ]
+    },
+    {
+      "additional_information": [
+        {
+          "chain_website": "https://bitsong.io/"
+        },
+        {
+          "coin_landing_page": "https://www.coinlanding.page/post/bitsong"
+        },
+        {
+          "git_repo": "https://github.com/bitsongofficial/go-bitsong"
+        }
+      ],
+      "base": "ibc/E7D5E9D0E9BF8B7354929A817DD28D4D017E745F638954764AA88522A7A409EC",
+      "coingecko_id": "bitsong",
+      "denom_units": [
+        {
+          "denom": "ibc/E7D5E9D0E9BF8B7354929A817DD28D4D017E745F638954764AA88522A7A409EC",
+          "exponent": 0,
+          "aliases": [
+            "ubtsg"
+          ]
+        },
+        {
+          "denom": "btsg",
+          "exponent": 6
+        }
+      ],
+      "description": "BitSong Native Token",
+      "display": "btsg",
+      "keywords": [
+        "Native"
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/btsg.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitsong/images/btsg.svg"
+      },
+      "name": "BitSong",
+      "symbol": "BTSG",
+      "traces": [
+        {
+          "counterparty": {
+            "base_denom": "ubtsg",
+            "chain_name": "bitsong",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-229",
+            "path": "transfer/channel-229/ubtsg"
+          },
+          "type": "ibc"
+        }
+      ],
+      "type_asset": "sdk.coin"
+    },
+    {
+      "additional_information": [
+        {
+          "chain_website": "https://www.bitcanna.io/"
+        },
+        {
+          "coin_landing_page": "https://www.coinlanding.page/post/bitcanna"
+        },
+        {
+          "git_repo": "https://github.com/BitCannaGlobal/bcna"
+        }
+      ],
+      "base": "ibc/ADBEC1A7AC2FEF73E06B066A1C94DAB6C27924EF7EA3F5A43378150009620284",
+      "coingecko_id": "bitcanna",
+      "denom_units": [
+        {
+          "denom": "ibc/ADBEC1A7AC2FEF73E06B066A1C94DAB6C27924EF7EA3F5A43378150009620284",
+          "exponent": 0,
+          "aliases": [
+            "ubcna"
+          ]
+        },
+        {
+          "denom": "bcna",
+          "exponent": 6
+        }
+      ],
+      "description": "The BCNA coin is the transactional token within the BitCanna network, serving the legal cannabis industry through its payment network, supply chain and trust network.",
+      "display": "bcna",
+      "keywords": [
+        "Native"
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitcanna/images/bcna.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/bitcanna/images/bcna.svg"
+      },
+      "name": "BitCanna",
+      "symbol": "BCNA",
+      "traces": [
+        {
+          "counterparty": {
+            "base_denom": "ubcna",
+            "chain_name": "bitcanna",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-232",
+            "path": "transfer/channel-232/ubcna"
+          },
+          "type": "ibc"
+        }
+      ]
+    },
+    {
+      "additional_information": [
+        {
+          "chain_website": "https://evmos.org/"
+        },
+        {
+          "coin_landing_page": "https://www.coinlanding.page/post/evmos"
+        },
+        {
+          "git_repo": "https://github.com/evmos/evmos"
+        }
+      ],
+      "base": "ibc/19DD710119533524061885A6F190B18AF28D9537E2BAE37F32A62C1A25979287",
+      "coingecko_id": "evmos",
+      "denom_units": [
+        {
+          "denom": "ibc/19DD710119533524061885A6F190B18AF28D9537E2BAE37F32A62C1A25979287",
+          "exponent": 0,
+          "aliases": [
+            "aevmos"
+          ]
+        },
+        {
+          "denom": "evmos",
+          "exponent": 18
+        }
+      ],
+      "description": "The native EVM, governance and staking token of the Evmos Hub",
+      "display": "evmos",
+      "keywords": [
+        "Native"
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/evmos.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/images/evmos.svg"
+      },
+      "name": "Evmos",
+      "symbol": "EVMOS",
+      "traces": [
+        {
+          "counterparty": {
+            "base_denom": "aevmos",
+            "chain_name": "evmos",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-292",
+            "path": "transfer/channel-292/aevmos"
+          },
+          "type": "ibc"
+        }
+      ]
+    },
+    {
+      "additional_information": [
+        {
+          "chain_website": "Error in Chain Registry."
+        },
+        {
+          "coin_landing_page": "https://www.coinlanding.page/post/neutron"
+        },
+        {
+          "git_repo": "https://github.com/neutron-org/neutron"
+        }
+      ],
+      "base": "ibc/0025F8A87464A471E66B234C4F93AEC5B4DA3D42D7986451A059273426290DD5",
+      "coingecko_id": "neutron",
+      "denom_units": [
+        {
+          "denom": "ibc/0025F8A87464A471E66B234C4F93AEC5B4DA3D42D7986451A059273426290DD5",
+          "exponent": 0,
+          "aliases": [
+            "untrn"
+          ]
+        },
+        {
+          "denom": "ntrn",
+          "exponent": 6
+        }
+      ],
+      "description": "The native token of Neutron chain.",
+      "display": "ntrn",
+      "keywords": [
+        "Native"
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ntrn.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/neutron/images/ntrn.svg"
+      },
+      "name": "Neutron",
+      "symbol": "NTRN",
+      "traces": [
+        {
+          "counterparty": {
+            "base_denom": "untrn",
+            "chain_name": "neutron",
+            "channel_id": "channel-1"
+          },
+          "chain": {
+            "channel_id": "channel-569",
+            "path": "transfer/channel-569/untrn"
           },
           "type": "ibc"
         }

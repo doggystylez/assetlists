@@ -1,5 +1,5 @@
 {
-  "$schema": "../zone.schema.json",
+  "$schema": "https://raw.githubusercontent.com/osmo-support-lab/assetlists/main/zone.schema.json",
   "chain_name": "cosmoshub",
   "assets": [
     {
@@ -395,6 +395,15 @@
     {
       "base_denom": "aevmos",
       "chain_name": "evmos",
+      "frontend_properties": {
+        "keywords": [
+          "Native"
+        ]
+      }
+    },  
+    {
+      "base_denom": "untrn",
+      "chain_name": "neutron",
       "frontend_properties": {
         "keywords": [
           "Native"
