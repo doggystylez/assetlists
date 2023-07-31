@@ -3371,7 +3371,7 @@
     {
       "additional_information": [
         {
-          "chain_website": "Error in Chain Registry."
+          "chain_website": "https://www.switcheo.com/"
         },
         {
           "coin_landing_page": "https://www.coinlanding.page/post/carbon"
@@ -3907,7 +3907,7 @@
     {
       "additional_information": [
         {
-          "chain_website": "Error in Chain Registry."
+          "chain_website": "https://www.cudos.org/"
         },
         {
           "coin_landing_page": "https://www.coinlanding.page/post/cudos"
@@ -5327,9 +5327,6 @@
     },
     {
       "additional_information": [
-        {
-          "homepage_link": "https://www.marbledao.finance/"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -5389,12 +5386,6 @@
     },
     {
       "additional_information": [
-        {
-          "homepage_link": "https://netadao.zone/"
-        },
-        {
-          "daodao_link": "https://daodao.zone/dao/juno1c5v6jkmre5xa9vf9aas6yxewc7aqmjy0rlkkyk4d88pnwuhclyhsrhhns6"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -5454,9 +5445,6 @@
     },
     {
       "additional_information": [
-        {
-          "daodao_link": "https://daodao.zone/dao/juno1zhkxq66wp0m6d5x79tqce604jhu24qlt5zg5nfys48wxm6mtydxqare5g8"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -5516,9 +5504,6 @@
     },
     {
       "additional_information": [
-        {
-          "daodao_link": "https://daodao.zone/dao/juno1svduqrvcmzpl5g74q8rkm6rhcjnhch2yaagzu4ljuv2u9tf86ltqx9a54s"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -5578,9 +5563,6 @@
     },
     {
       "additional_information": [
-        {
-          "homepage_link": "https://juno.marbledao.finance/"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -5638,12 +5620,6 @@
     },
     {
       "additional_information": [
-        {
-          "homepage_link": "https://decentralizehk.like.community"
-        },
-        {
-          "daodao_link": "https://daodao.zone/dao/juno1vntnqevwk47escuxrfrdk99070vs0gczyyx0wa2pp08j25n0ee6qryqhzk"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -5699,9 +5675,6 @@
     },
     {
       "additional_information": [
-        {
-          "daodao_link": "https://daodao.zone/dao/juno1pv88fxyhvyv2edwed72leupsuympnwvmsny4jtzspv9zw2dcrhkseh58kn"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -5876,12 +5849,6 @@
     },
     {
       "additional_information": [
-        {
-          "homepage_link": "https://gelotto.io/"
-        },
-        {
-          "daodao_link": "https://daodao.zone/dao/juno1tg7zc62st4h6gf2ap38sx94ph2kyhtpm3vuw2ck2plnkzjhmkavq36xy5k"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -5941,12 +5908,6 @@
     },
     {
       "additional_information": [
-        {
-          "homepage_link": "https://gelotto.io/"
-        },
-        {
-          "daodao_link": "https://daodao.zone/dao/juno1tg7zc62st4h6gf2ap38sx94ph2kyhtpm3vuw2ck2plnkzjhmkavq36xy5k"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -6006,9 +5967,6 @@
     },
     {
       "additional_information": [
-        {
-          "homepage_link": "https://juno.stakeeasy.finance/"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -6068,9 +6026,6 @@
     },
     {
       "additional_information": [
-        {
-          "homepage_link": "https://juno.stakeeasy.finance/"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -6131,9 +6086,6 @@
     },
     {
       "additional_information": [
-        {
-          "daodao_link": "https://daodao.zone/dao/juno1nwh5nnd7nlccn08wjv2zrenfxeudvc883z9sjthtzygahwmep6pqjezuh2"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -6192,12 +6144,6 @@
     },
     {
       "additional_information": [
-        {
-          "daodao_link": "https://daodao.zone/dao/juno1897myh45srdc2syg354x40fpsguzv046t05ysqfuq3844j3whfmqenk3pe"
-        },
-        {
-          "homepage_link": "https://stakeeasy.finance/"
-        },
         null,
         {
           "chain_website": "https://www.junonetwork.io/"
@@ -8229,6 +8175,7 @@
         }
       ],
       "base": "ibc/B9606D347599F0F2FDF82BA3EE339000673B7D274EA50F59494DC51EFCD42163",
+      "coingecko_id": "onomy-protocol",
       "denom_units": [
         {
           "denom": "ibc/B9606D347599F0F2FDF82BA3EE339000673B7D274EA50F59494DC51EFCD42163",
@@ -8481,7 +8428,7 @@
           "type": "liquid-stake",
           "counterparty": {
             "chain_name": "persistence",
-            "base_denom": "XPRT"
+            "base_denom": "uxprt"
           },
           "provider": "Persistence"
         },
