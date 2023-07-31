@@ -408,7 +408,7 @@ const generateAssets = async (generatedAssetlist, zoneAssetlist) => {
     }
 
     const { frontend_properties: override } = zoneAsset;
-    const allAdditional = override.additional_information ? [...override.additional_information] : [];
+    const allAdditional = (override && override.additional_information) ? [...override.additional_information] : [];
     const allKeywords = generatedAsset.keywords ? [...generatedAsset.keywords] : [];
 
     /**
