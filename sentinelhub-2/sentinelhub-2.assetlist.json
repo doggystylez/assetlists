@@ -1,0 +1,190 @@
+{
+  "$schema": "../assetlist.schema.json",
+  "assets": [
+    {
+      "base": "udvpn",
+      "coingecko_id": "sentinel",
+      "denom_units": [
+        {
+          "denom": "udvpn",
+          "exponent": 0
+        },
+        {
+          "denom": "dvpn",
+          "exponent": 6
+        }
+      ],
+      "description": "DVPN is the native token of the Sentinel Hub.",
+      "display": "dvpn",
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sentinel/images/dvpn.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/sentinel/images/dvpn.svg"
+      },
+      "name": "Sentinel",
+      "symbol": "DVPN"
+    },
+    {
+      "additional_information": [
+        {
+          "chain_website": "https://scrt.network/"
+        },
+        {
+          "coin_landing_page": "https://www.coinlanding.page/post/secretnetwork"
+        },
+        {
+          "git_repo": "https://github.com/scrtlabs/SecretNetwork"
+        }
+      ],
+      "base": "ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8",
+      "coingecko_id": "secret",
+      "denom_units": [
+        {
+          "denom": "ibc/31FEE1A2A9F9C01113F90BD0BBCCE8FD6BBB8585FAF109A2101827DD1D5B95B8",
+          "exponent": 0,
+          "aliases": [
+            "uscrt"
+          ]
+        },
+        {
+          "denom": "scrt",
+          "exponent": 6
+        }
+      ],
+      "description": "The native token of Secret Network",
+      "display": "scrt",
+      "keywords": [
+        "Native"
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/scrt.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/secretnetwork/images/scrt.svg"
+      },
+      "name": "Secret Network",
+      "symbol": "SCRT",
+      "traces": [
+        {
+          "counterparty": {
+            "base_denom": "uscrt",
+            "chain_name": "secretnetwork",
+            "channel_id": "channel-3"
+          },
+          "chain": {
+            "channel_id": "channel-50",
+            "path": "transfer/channel-50/uscrt"
+          },
+          "type": "ibc"
+        }
+      ]
+    },
+    {
+      "additional_information": [
+        {
+          "chain_website": "https://osmosis.zone/"
+        },
+        {
+          "coin_landing_page": "https://www.coinlanding.page/post/osmosis"
+        },
+        {
+          "git_repo": "https://github.com/osmosis-labs/osmosis"
+        }
+      ],
+      "base": "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518",
+      "coingecko_id": "osmosis",
+      "denom_units": [
+        {
+          "denom": "ibc/ED07A3391A112B175915CD8FAF43A2DA8E4790EDE12566649D0C2F97716B8518",
+          "exponent": 0,
+          "aliases": [
+            "uosmo"
+          ]
+        },
+        {
+          "denom": "osmo",
+          "exponent": 6
+        }
+      ],
+      "description": "The native token of Osmosis",
+      "display": "osmo",
+      "keywords": [
+        "dex",
+        "staking",
+        "Native"
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/osmosis/images/osmo.svg"
+      },
+      "name": "Osmosis",
+      "symbol": "OSMO",
+      "traces": [
+        {
+          "counterparty": {
+            "base_denom": "uosmo",
+            "chain_name": "osmosis",
+            "channel_id": "channel-2"
+          },
+          "chain": {
+            "channel_id": "channel-0",
+            "path": "transfer/channel-0/uosmo"
+          },
+          "type": "ibc"
+        }
+      ],
+      "type_asset": "sdk.coin"
+    },
+    {
+      "additional_information": [
+        {
+          "chain_website": "Error in Chain Registry."
+        },
+        {
+          "coin_landing_page": "https://www.coinlanding.page/post/decentr"
+        },
+        {
+          "git_repo": "https://github.com/Decentr-net/decentr"
+        }
+      ],
+      "base": "ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783",
+      "coingecko_id": "decentr",
+      "denom_units": [
+        {
+          "denom": "ibc/B1C0DDB14F25279A2026BC8794E12B259F8BDA546A3C5132CCAEE4431CE36783",
+          "exponent": 0,
+          "aliases": [
+            "udec"
+          ]
+        },
+        {
+          "denom": "dec",
+          "exponent": 6
+        }
+      ],
+      "description": "The native token of Decentr",
+      "display": "dec",
+      "keywords": [
+        "Native"
+      ],
+      "logo_URIs": {
+        "png": "https://raw.githubusercontent.com/cosmos/chain-registry/master/decentr/images/dec.png",
+        "svg": "https://raw.githubusercontent.com/cosmos/chain-registry/master/decentr/images/dec.svg"
+      },
+      "name": "Decentr",
+      "symbol": "DEC",
+      "traces": [
+        {
+          "counterparty": {
+            "base_denom": "udec",
+            "chain_name": "decentr",
+            "channel_id": "channel-4"
+          },
+          "chain": {
+            "channel_id": "channel-55",
+            "path": "transfer/channel-55/udec"
+          },
+          "type": "ibc"
+        }
+      ]
+    }
+  ],
+  "chain_name": "sentinel"
+}
