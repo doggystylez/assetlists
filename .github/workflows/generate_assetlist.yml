@@ -12,6 +12,7 @@ on:
           - juno-1
           - kaiyo-1
           - cosmoshub-4
+          - sentinelhub-2
       chain_name_selection:
         description: 'Chain NAME Selection'
         default: 'osmosis'
@@ -21,6 +22,7 @@ on:
           - juno
           - kujira
           - cosmoshub
+          - sentinel
 jobs:
   generate_assetlist:
     name: Generate Assetlist with Code
