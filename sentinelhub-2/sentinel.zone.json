@@ -1,0 +1,37 @@
+{
+  "$schema": "https://raw.githubusercontent.com/osmo-support-lab/assetlists/main/zone.schema.json",
+  "chain_name": "cosmoshub",
+  "assets": [
+    {
+      "chain_name": "sentinel",
+      "base_denom": "udvpn"
+    },
+    {
+      "base_denom": "uscrt",
+      "chain_name": "secretnetwork",
+      "frontend_properties": {
+        "keywords": [
+          "Native"
+        ]
+      }
+    },
+    {
+      "base_denom": "uosmo",
+      "chain_name": "osmosis",
+      "frontend_properties": {
+        "keywords": [
+          "Native"
+        ]
+      }
+    },
+    {
+      "base_denom": "udec",
+      "chain_name": "decentr",
+      "frontend_properties": {
+        "keywords": [
+          "Native"
+        ]
+      }
+    }
+  ]
+}
